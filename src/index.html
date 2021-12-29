@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OlaMusicPlayer</title>
+    <link rel="icon" type="image/png" href="images/index.png" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://use.fontawesome.com/0ab7faa3cf.js"></script>
+</head>
+
+<body>
+
+
+    <!-- Modal -->
+    <!-- Add song modal -->
+    <div class="modal" id="addsongmodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog modal-dialog-centered" role="document">
+            <form id="formdatasubmit" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add Song</h5>
+                        <button type="button" class="close closeaddmodalx" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <h6 class="text-danger errortextmssg"></h6>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-music" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Song Title" id="songtitle" maxlength="89" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Artist Name" id="artistname" maxlength="89" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Song</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="musicfile" accept="audio/mp3,audio/*;capture=microphone" aria-describedby="inputGroupFileAddon01" required>
+                                <label class="custom-file-label" for="musicfile">Choose file</label>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Music Image</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="musicimage" accept="image/png, image/gif, image/jpeg" aria-describedby="inputGroupFileAddon01" required>
+                                <label class="custom-file-label" for="musicimage">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" id="savesong" value="Save Song">
+                        <button type="button" class="btn btn-secondary closeaddmodal" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End of add song modal -->
+    <!-- End of Modal -->
+
+    <!-- Modal -->
+    <!-- Edit song modal -->
+    <div class="modal" id="editsongmodal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog modal-dialog-centered" role="document">
+            <form id="editformdatasubmit" enctype="multipart/form-data">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title myowntitle"></h5>
+                        <button type="button" class="close closeeditmodalx" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <input type="hidden" id="songkeyid" value="">
+                        <h6 class="text-danger errortextmssgedit"></h6>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-music" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Song Title" id="editsongtitle" maxlength="89" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Artist Name" id="editartistname" maxlength="89" aria-label="Username" aria-describedby="basic-addon1" required>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">Music Image</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="editmusicimage" accept="image/png, image/gif, image/jpeg" aria-describedby="inputGroupFileAddon01">
+                                <label class="custom-file-label" for="editmusicimage">Choose file</label>
+                            </div>
+                        </div>
+                        <div>
+                            <img class="editbgimage animate__animated animate__fadeIn" src="" style="width:40px; height:40px;">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary" id="editsong" value="Edit Song">
+                        <button type="button" class="btn btn-secondary closeeditmodal" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End of Edit song modal -->
+    <!-- End of Modal -->
+
+    <!-- side navigation -->
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" id="closenav" title="close">&times;</a>
+        <div class="row">
+            <div class="col text-center">
+                <button class="btn btn-primary btn-sm w-75" id="addsong">Add Song</button>
+            </div>
+        </div>
+        <br>
+
+        <!-- Search form -->
+
+        <div class="input-group md-form form-sm form-1 pl-0 mb-2 animate__animated animate__fadeInLeft myserachform" style="display: none;">
+            <div class="input-group-prepend">
+                <span class="input-group-text purple lighten-3" id="basic-text1"><i class="fa fa-search text-white"
+                  aria-hidden="true"></i></span>
+            </div>
+            <input class="form-control my-0 py-1" id="searchkeyword" type="text" placeholder="Search" aria-label="Search">
+        </div>
+
+
+
+        <!-- list of song controller -->
+        <ul class="list-group musiclistcontain"></ul>
+    </div>
+    <!-- end of side navigation -->
+
+    <div class="music-container">
+        <div class="overlayingbg"></div>
+        <div class="music-content">
+            <div id="bg-image">
+                <div id="blackLayer">
+                    <img src="images/ncs1.png" class="animate__animated animate__fadeIn" alt="" id="bgImage">
+                </div>
+            </div>
+            <div id="menu">
+                <img src="images/menu.png" alt="Open Nav" id="sidebarmenu" title="Open Side Nav">
+                <img id="searchicon" src="images/search.png" alt="">
+            </div>
+            <div id="volume-container">
+                <img src="images/volume-low.png" alt="" id="volumn-down">
+                <input type="range" class="slider" id="volumeslider" min="0" max="100" value="100" step="1">
+                <img src="images/volumn-high.png" alt="" id="volumn-up">
+            </div>
+            <div id="music-image">
+                <div id="circle-image">
+                    <img src="images/ncs1.png" class="animate__animated animate__fadeIn" alt="" id="image">
+                </div>
+                <div id="music-title">
+                    <h5 id="playlist_status">Loading</h5>
+                    <h6 id="playlist_artist">Setting things up for you</h6>
+                </div>
+            </div>
+            <div id="music-menu">
+                <button id="random"><img src="images/random.png" alt=""></button>
+                <button id="mutebtn"><img src="images/speaker.png" alt=""></button>
+            </div>
+            <div id="currentTime">
+                <span id="curtimetext">00:00</span>
+                <span id="durtimeText">00:00</span>
+            </div>
+            <input type="range" class="seekslider" id="seekslider" min="0" max="100" value="0" step="1">
+            <div id="buttons">
+                <button class="repeat" id="repeat"><img src="images/rep.png" alt=""></button>
+                <div>
+                    <button class="pre" id="prevbtn"><img src="images/backward.png" alt=""></button>
+                    <button class="play" id="playpausebtn"><img src="images/play-red.png" alt=""></button>
+                    <button class="next" id="nextbtn"><img src="images/forward.png" alt=""></button>
+                </div>
+                <!-- <span class="like">
+                        <i class="fa fa-heart-o" aria-hidden="true"></i>
+                    </span> -->
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
